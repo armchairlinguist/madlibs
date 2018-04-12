@@ -203,13 +203,13 @@ novel_pitch = [
 "young",
 "philosophical",
 "hopelessly romantic",
-"hyper—sexual",
+"hyper-sexual",
 "precocious",
 "unlucky",
 "quixotic",
 "desperate",
 "refugee",
-"dissatisﬁed",
+"dissatisfied",
 "bored",
 "morally compromised",
 "lovesick",
@@ -248,7 +248,7 @@ novel_pitch = [
 
 ["adventure",
 "commitment",
-"deshe",
+"desire",
 "devotion",
 "dream",
 "effort",
@@ -360,21 +360,31 @@ mapping = {
 
 
 document.addEventListener("DOMContentLoaded", function(event){
-	function mapLetterToWord() {
+	function mapNameToWord() {
 		name = this.value;
-		letters = name.split('');
+		letters = name.toLowerCase().replace(/\s/g, "").split('');
 		mn_words = []
 		np_words = []
-		letters.forEach(function callback(letter, index) {
-			alphaPosition = mapping[letter];
-			// index is used to select the right list to retrieve from
-			// alphaPosition is then used to retrieve the right word
-			if (index < male_novelist.length) {
-				mn_words.push(male_novelist[index][alphaPosition]);
+		if (letters.length == 0) {
+			mn_blanks = document.getElementsByName("mn");
+			for (var i = 0; i < mn_blanks.length; i++) {
+				mn_blanks[i].innerHTML = "_____";
 			}
-			if (index < novel_pitch.length) {
-				np_words.push(novel_pitch[index][alphaPosition]);
+			for (var i = 0; i < np_blanks.length; i++) {
+				np_blanks[i].innerHTML = "_____";
 			}
+		} else {
+			letters.forEach(function callback(letter, index) {
+				alphaPosition = mapping[letter];
+				// index is used to select the right list to retrieve from
+				// alphaPosition is then used to retrieve the right word
+				if (index < male_novelist.length) {
+					mn_words.push(male_novelist[index][alphaPosition]);
+				}
+				if (index < novel_pitch.length) {
+					np_words.push(novel_pitch[index][alphaPosition]);
+				}
+			});
 			// now take the arrays and spit them into the blanks
 			mn_blanks = document.getElementsByName("mn");
 			for (var i = 0; i < mn_blanks.length; i++) {
@@ -384,9 +394,9 @@ document.addEventListener("DOMContentLoaded", function(event){
 			for (var i = 0; i < np_blanks.length; i++) {
 				np_blanks[i].innerHTML = (np_words[i] == undefined ? "_____" : np_words[i]);
 			}
-		});
+		}
 	}
 
 	formElement = document.getElementById("fullname");
-	formElement.addEventListener('keyup', mapLetterToWord, false);
+	formElement.addEventListener('keyup', mapNameToWord, false);
 });
