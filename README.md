@@ -4,8 +4,8 @@
 
 The instructions and word lists were created by Electric Literature:
 
-[If You’re Not Sure How a Male Author Would Describe You, Use Our Handy Chart](https://electricliterature.com/if-youre-not-sure-how-a-male-author-would-describe-you-use-our-handy-chart-6a44afe0e586)
-[This Handy Chart Automatically Generates a Pitch for Your New Novel](https://electricliterature.com/how-to-write-elevator-pitch-novel-publicity-infographic-a8ec74ecf7ce)
+* [If You’re Not Sure How a Male Author Would Describe You, Use Our Handy Chart](https://electricliterature.com/if-youre-not-sure-how-a-male-author-would-describe-you-use-our-handy-chart-6a44afe0e586)
+* [This Handy Chart Automatically Generates a Pitch for Your New Novel](https://electricliterature.com/how-to-write-elevator-pitch-novel-publicity-infographic-a8ec74ecf7ce)
 
 I only wrote the JavaScript to make it amusingly easy and interactive.
 
