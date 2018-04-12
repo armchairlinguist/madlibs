@@ -222,9 +222,9 @@ novel_pitch = [
 ["man's",
 "orphan's",
 "daughter's",
-"mothers",
-"adoloscent's",
-"soldiers",
+"mother's",
+"adolescent's",
+"soldier's",
 "student's",
 "widow's",
 "woman's",
@@ -234,7 +234,7 @@ novel_pitch = [
 "extended family's",
 "child's",
 "mistress's",
-"dictators",
+"dictator's",
 "vampire's",
 "ghost's",
 "starship captain's",
@@ -303,7 +303,7 @@ novel_pitch = [
 ["fear of spiders",
 "adoption",
 "traumatic childhood",
-"mother’s deaih",
+"mother's death",
 "sexless marriage",
 "Oedipal complex",
 "feminism",
@@ -357,22 +357,37 @@ mapping = {
 	"z": 25
 }
 
+// Code to interactively make weird descriptions
 
-
-document.addEventListener("DOMContentLoaded", function(event){
+document.addEventListener("DOMContentLoaded", function(event) {
+	function arrayOfLetters(string) {
+		return string.toLowerCase().replace(/\s/g, "").split('');
+	}
+	
+	function blankOut(nodeList) {
+		for (var i = 0; i < nodeList.length; i++) {
+			nodeList[i].innerHTML = "_____";
+		}
+	}
+	
+	function wordOrBlank(words, nodes) {
+		for (var i = 0; i < nodes.length; i++) {
+			nodes[i].innerHTML = (words[i] == undefined ? "_____" : words[i]);
+		}
+	}
+	
+	// Called whenever the user releases a key
 	function mapNameToWord() {
-		name = this.value;
-		letters = name.toLowerCase().replace(/\s/g, "").split('');
+		letters = arrayOfLetters(this.value);
 		mn_words = []
 		np_words = []
+		mn_slots = document.getElementsByName("mn");
+		np_slots = document.getElementsByName("np");
+
+		// No letters right now, clear everything out
 		if (letters.length == 0) {
-			mn_blanks = document.getElementsByName("mn");
-			for (var i = 0; i < mn_blanks.length; i++) {
-				mn_blanks[i].innerHTML = "_____";
-			}
-			for (var i = 0; i < np_blanks.length; i++) {
-				np_blanks[i].innerHTML = "_____";
-			}
+			blankOut(mn_slots);
+			blankOut(np_slots);
 		} else {
 			letters.forEach(function callback(letter, index) {
 				alphaPosition = mapping[letter];
@@ -386,14 +401,8 @@ document.addEventListener("DOMContentLoaded", function(event){
 				}
 			});
 			// now take the arrays and spit them into the blanks
-			mn_blanks = document.getElementsByName("mn");
-			for (var i = 0; i < mn_blanks.length; i++) {
-				mn_blanks[i].innerHTML = (mn_words[i] == undefined ? "_____" : mn_words[i]);
-			}
-			np_blanks = document.getElementsByName("np");
-			for (var i = 0; i < np_blanks.length; i++) {
-				np_blanks[i].innerHTML = (np_words[i] == undefined ? "_____" : np_words[i]);
-			}
+			wordOrBlank(mn_words, mn_slots);
+			wordOrBlank(np_words, np_slots);
 		}
 	}
 
